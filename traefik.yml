@@ -1,0 +1,30 @@
+log:
+  level: INFO
+
+api:
+  insecure: true
+  dashboard: true
+
+entryPoints:
+  web:
+    address: ":80"
+
+  websecure:
+    address: ":443"
+
+certificatesResolvers:
+  myresolver:
+    acme:
+      email: youremail@gmail.com
+      storage: acme.json
+      httpChallenge:
+        # used during the challenge
+        entryPoint: web
+providers:
+  file:
+    directory: "/conf"
+    filename: "dynamic_conf.yml"
+    watch: true
+  docker:
+    endpoint: "unix:///var/run/docker.sock"
+    exposedByDefault: false
