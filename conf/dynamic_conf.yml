@@ -1,0 +1,15 @@
+http:
+  routers:
+    backend-api:
+      entryPoints:
+        - "websecure"
+      rule: Host(`api-mvp.huystart17.work`)
+      service: backend-api
+      tls:
+        certResolver: myresolver
+  services:
+    backend-api:
+      loadBalancer:
+        servers:
+          - url: http://172.17.0.1:3003
+        passHostHeader: true
